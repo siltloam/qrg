@@ -12,6 +12,7 @@ class QRCode():
         self.input = input
         with alpha_nums_path.open() as file:
             self.alpha_nums = set([line.rstrip('\n') for line in file])
+            self.alpha_nums.add(" ")
         
     def is_numeric(self):
         """Used to determine whether or not an input is numeric
@@ -28,6 +29,12 @@ class QRCode():
         return True
         
     def is_alphanumeric(self):
+        """Used to determine whether or not an input is alphanumeric.
+        Specific alphanumeric requirements are found in files/alpha_nums.txt
+
+        Returns:
+            bool: If alphanumeric or not
+        """
         for c in self.input:
             if c in self.alpha_nums:
                 pass
