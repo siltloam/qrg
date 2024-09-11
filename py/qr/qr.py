@@ -8,6 +8,7 @@ class QRCode():
 
         Args:
             input (String): Input of the QR
+            alpha_nums (Set): Set of alphanumeric characters for each QR
         """
         self.input = input
         with alpha_nums_path.open() as file:
