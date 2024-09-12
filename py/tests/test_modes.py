@@ -35,3 +35,13 @@ class TestModes(unittest.TestCase):
     def test_is_alphanumeric_four(self):
         self.qr1.input = "flame4$"
         self.assertEqual(self.qr1.is_alphanumeric(), False)
+        
+    def test_set_mode_one(self):
+        self.qr1.set_mode()
+        self.assertEqual(self.qr1.encoding_mode, 0b0001)
+        
+    def test_set_mode_two(self):
+        self.qr1.input = "HELLO3"
+        self.qr1.set_mode()
+        self.assertEqual(self.qr1.encoding_mode, 0b0010)
+        

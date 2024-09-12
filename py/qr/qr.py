@@ -12,6 +12,7 @@ class QRCode():
         """
         self.input = input
         self.error_correction_level = None
+        self.encoding_mode = None
         with alpha_nums_path.open() as file:
             self.alpha_nums = set([line.rstrip('\n') for line in file])
             self.alpha_nums.add(" ")
@@ -44,6 +45,15 @@ class QRCode():
                 return False
         return True
     
+    def set_mode(self):
+        """Sets the mode for QR codes to be encoded. We check for numeric
+        mode after alphanumeric since alphanumeric supersets numeric
+        """
+        if self.is_alphanumeric() == True:
+            self.encoding_mode = 0b0010
+        if self.is_numeric() == True:
+            self.encoding_mode = 0b0001
+        
     def set_error_correction_level(self):
         """Changes the error correction level for the QR generation
         before encoding the data
