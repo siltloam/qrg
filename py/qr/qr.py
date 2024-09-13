@@ -13,10 +13,13 @@ class QRCode():
         self.input = input
         self.error_correction_level = None
         self.encoding_mode = None
+        self.version = 4
         with alpha_nums_path.open() as file:
             self.alpha_nums = set([line.rstrip('\n') for line in file])
             self.alpha_nums.add(" ")
         
+        #TODO: run functions here to auto-assign attributes for the QR code
+       
     def is_numeric(self):
         """Used to determine whether or not an input is numeric
 
@@ -70,3 +73,15 @@ class QRCode():
                 self.error_correction_level = "H"
             case _:
                 error = input("Please select a level of error correction: (L/M/Q/H)")
+                
+    def get_character_count_indicator(self):
+        """Indicates the number of bits required for the character
+        encoding based off of the encoding mode (versions 1-9)
+
+        Returns:
+            int: number of bits required for the character count
+        """
+        if self.encoding_mode == 0b0010:
+            return 10
+        else:
+            return 9
