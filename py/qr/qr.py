@@ -73,19 +73,6 @@ class QRCode():
                 self.error_correction_level = "H"
             case _:
                 error = input("Please select a level of error correction: (L/M/Q/H)")
-                
-    def get_character_count_indicator(self):
-        """Indicates the number of bits required for the character
-        encoding based off of the encoding mode (versions 1-9)
-
-        Returns:
-            int: number of bits required for the character count
-        """
-        # alphanumeric is 10 and numeric is 9 (bits)
-        if self.encoding_mode == 0b0010:
-            return 10
-        else:
-            return 9
     
     def get_character_count(self):
         """Returns the binary representation of the character
@@ -95,4 +82,11 @@ class QRCode():
             0b(int): Binary representation of input length
         """
         character_count = len(self.input)
-        return bin(character_count)
+        # if alphanumeric pad to 9 bits, if numeric pad to 10 bits
+        if self.encoding_mode == 0b0010:
+            return format(character_count, '09b')
+        elif self.encoding_mode == 0b0001:
+            return format(character_count, '010b')
+        else:
+            return None          
+            
