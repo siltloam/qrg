@@ -81,7 +81,18 @@ class QRCode():
         Returns:
             int: number of bits required for the character count
         """
+        # alphanumeric is 10 and numeric is 9 (bits)
         if self.encoding_mode == 0b0010:
             return 10
         else:
             return 9
+    
+    def get_character_count(self):
+        """Returns the binary representation of the character
+        count of the string input, important for encoding
+
+        Returns:
+            0b(int): Binary representation of input length
+        """
+        character_count = len(self.input)
+        return bin(character_count)
